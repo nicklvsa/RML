@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Hello World</h1>
+        <input type="text" *value="testvalue">
+        <div %for="names" :as="name" :key="i">
+            <p %if="{{testvalue.length}} != 0">{{ name }}</p>
+            <div static>
+                <input %if="1 == 0" type="text" value="{{name}}" />
+            </div>
+        </div>
+        <br/>
+        <button %if="{{testvalue}} == 'something'" @click="testexample">something</button>
+        <button %if="{{testvalue}} == 'example'" @click="testsomething">example</button>
+        <div %if="{{names.length}} > 1">
+            <div %for="names" :as="name" :key="i">
+                <h4>{{ name }}</h4>
+            </div>
+
+            <div %else>
+                <h3>else</h3>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="rml.js"></script>
+
+    <script type="text/javascript">
+        const data = {
+            store: new function() {
+                this.names = [
+                    '123',
+                    'abc',
+                ];
+
+                this.testvalue = 'example';
+
+                this.testexample = () => {
+                    //this.names.push('testing');
+                    this.testvalue = 'example';
+                };
+
+                this.testsomething = () => {
+                    this.testvalue = 'something';
+                };
+            },
+        };
+
+        initRML(data);
+    </script>
+</body>
+</html>
