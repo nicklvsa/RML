@@ -63,6 +63,9 @@ const useRML = (data) => {
                     const keyword = attr.substring(1).toLowerCase().trim();
 
                     switch (keyword) {
+                        case 'rml':
+                            handleRMLTemplatedStrings(elem, attr, store);
+                            break;
                         case 'if':
                             handleIf(elem, attr, store);
                             break;
@@ -72,6 +75,12 @@ const useRML = (data) => {
                     }
                 }
             });
+        });
+    };
+
+    const handleRMLTemplatedStrings = (elem, attr, store) => {
+        Object.keys(store).forEach((obj) => {
+            elem.textContent = elem.textContent.replace(/\s/g, '').replaceAll(`{{${obj}}}`, store[obj]);
         });
     };
 

@@ -7,7 +7,12 @@
 </head>
 <body>
     <div>
-        <h1>Hello World</h1>
+        <div %if="{{testvalue}} == 'something'">
+            <h1 %rml>{{testvalue}}</h1>
+            <div %else>
+                <h4 %rml>{{testvalue}}</h4>
+            </div>
+        </div>
         <input type="text" *value="testvalue">
         <div %for="names" :as="name" :key="i">
             <p %if="{{testvalue.length}} != 0">{{ name }}</p>
