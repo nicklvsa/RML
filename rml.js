@@ -20,6 +20,34 @@ const initRML = (data) => {
     useRML(data);
 };
 
+function $ref(to) {
+    const func = v => window[Object.keys(to)[0].toString()] = v;
+
+    if (typeof func !== 'function') {
+        return {};
+    }
+
+    let strictTypes = false;
+    if (to.strict && to.strict === true) {
+        strictTypes = true;
+    }
+
+    return {
+        get $() {
+            return {};
+        },
+        set $(i) {
+            if (strictTypes) {
+                if (typeof i !== typeof window[Object.keys(to)[0].toString()]) {
+                    return to;
+                }
+            }
+
+            return func(i);
+        },
+    };
+}
+
 const useRML = (data) => {
     const funcInstanceOrDefault = (action, check) => {
         return (typeof check === 'function') ? check : console.log(`${action} on ${check} is not a function!`);

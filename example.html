@@ -37,6 +37,17 @@
     <script type="text/javascript" src="rml.js"></script>
 
     <script type="text/javascript">
+        var someVal = 20;
+        
+        const someRef = $ref({someVal, strict: true});
+
+        const changer = (inputRef) => {
+            inputRef.$ = 70;
+        };
+
+        changer(someRef);
+        console.log(someVal);
+
         const data = {
             store: new function() {
                 this.names = [
