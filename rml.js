@@ -42,7 +42,7 @@ function $ref(to) {
         },
         set $(i) {
             if (strictTypes) {
-                if (typeof i !== typeof window[Object.keys(to)[0].toString()]) {
+                if (typeof i !== typeof window[Object.keys(to)[to.objectPlacement].toString()]) {
                     return to;
                 }
             }
