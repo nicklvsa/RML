@@ -21,7 +21,11 @@ const initRML = (data) => {
 };
 
 function $ref(to) {
-    const func = v => window[Object.keys(to)[0].toString()] = v;
+    if (!to.objectPlacement || to.objectPlacement <= -1) {
+        to.objectPlacement = 0;
+    }
+
+    const func = v => window[Object.keys(to)[to.objectPlacement].toString()] = v;
 
     if (typeof func !== 'function') {
         return {};
